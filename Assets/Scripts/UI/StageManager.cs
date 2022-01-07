@@ -36,7 +36,7 @@ public class StageManager : MonoBehaviour
         bool isComplete = false;
 
         currentStage++;
-        if (maxStage==0&&(currentStage > maxStage))
+        if (maxStage!=0&&(currentStage > maxStage))
         {
             currentStage = maxStage;
             isComplete = true;

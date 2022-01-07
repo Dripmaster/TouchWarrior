@@ -2068,8 +2068,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -41.27462, y: 0}
-  m_SizeDelta: {x: 357.4508, y: 36}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 440, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1279847952
 MonoBehaviour:
@@ -2092,10 +2092,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: c15e31475fde59c46bf2c4c28fd18e2e, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -2254,6 +2254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1557928880}
+  - component: {fileID: 1557928881}
   m_Layer: 5
   m_Name: Timebar
   m_TagString: Untagged
@@ -2284,6 +2285,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 469}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1557928881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557928879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c0cd501669ae648aa22a634e2ed555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForeBar: {fileID: 1279847952}
+  TimeText: {fileID: 418922128}
 --- !u!1 &1632538269
 GameObject:
   m_ObjectHideFlags: 0
