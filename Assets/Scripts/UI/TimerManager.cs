@@ -45,6 +45,8 @@ public class TimerManager : MonoBehaviour
             if(limitTime!=0&& limitTime - timeValue <= 0)
             {//limit time reach
                 timeValue = limitTime;
+                GameManager.Instance.timeOut();
+                break;
             }
         } while (true);
     }
@@ -56,8 +58,8 @@ public class TimerManager : MonoBehaviour
             timeValue = 0;
         }
     }
-    public float getTimeValue()
+    public float getRemainTime()
     {
-        return timeValue;
+        return (limitTime - timeValue);
     }
 }

@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour
     public Sprite[] displaybtnSprites;
     public IconDisplay[] displayIcons;
 
+    public PopupManager popup_GameOverClear;
+
+
+    bool isStageClear;
     int currentIndex;
 
     private void Awake()
@@ -33,6 +37,7 @@ public class GameManager : MonoBehaviour
             _instance = this;
         }
         stageManager = FindObjectOfType(typeof(StageManager)) as StageManager;
+        isStageClear = false;
     }
 
     // Update is called once per frame
@@ -48,23 +53,29 @@ public class GameManager : MonoBehaviour
 
     public void onBtnClicked(int imgId)
     {
+        if (isStageClear) return;
+
         if(displayIcons[currentIndex].imageId == imgId)//correct
         {
             displayIcons[currentIndex].fire();
             currentIndex++;
             if (currentIndex >= displayIcons.Length)
             {
-                stageManager.UpStage();
+                isStageClear = stageManager.UpStage(); // max stage clear
             }
         }
         else//miss
         {
-            print("die~~~");
+            timeOut();
         }
     }
     public void clearIndex()
     {
         currentIndex = 0;
     }
-
+    public void timeOut()
+    {
+        popup_GameOverClear.gameObject.SetActive(true);
+        popup_GameOverClear.setPopup();
+    }
 }

@@ -29,7 +29,7 @@ public class StageManager : MonoBehaviour
     }
     public void setText(int s)
     {
-        stageText.text = "STAGE " + s.ToString("D3");
+        stageText.text = s.ToString("D3");
     }
     public bool UpStage()
     {
