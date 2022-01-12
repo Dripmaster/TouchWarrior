@@ -5,10 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/DummyScene.unity
-    guid: 8987dc2aa574ae9458df250d1ab3f45d
+    path: Assets/Scenes/Scene_Title.unity
+    guid: ae8786cb5806a54448a35944ae6ffbfa
+  - enabled: 1
+    path: Assets/Scenes/Popup.unity
+    guid: cca6158404e144749958e9cacd4b96fa
+  - enabled: 1
+    path: Assets/Scenes/Scene_RandomBox.unity
+    guid: f711525acb6313a47a49ac772a3f50a4
+  - enabled: 1
+    path: Assets/Scenes/Scene_Collection.unity
+    guid: fda9dc7653c15ff4e99c10c34bbfce89
+  - enabled: 1
+    path: Assets/Scenes/Mode_Challenge.unity
+    guid: b3637487a3a69fc4eaddd2fa9579f254
+  - enabled: 1
+    path: Assets/Scenes/YM_Classic.unity
+    guid: 5f074ef6b7d48434f92f51c87631d181
   m_configObjects: {}
