@@ -2283,7 +2283,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 502076423}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1404501252}
+        m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
+        m_MethodName: Btn_Title
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &502076423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5433,7 +5445,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 949221224}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1404501252}
+        m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
+        m_MethodName: Btn_Shop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &949221224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9069,23 +9093,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1404501251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e2178e5e789c04ca81f1ef6a5face8, type: 3}
+  m_Script: {fileID: 11500000, guid: 75be5da9007903747b14f34f4db54d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displaybtnSprites:
-  - {fileID: 21300000, guid: bf8af40042adab244ae474415d745a9d, type: 3}
-  - {fileID: 21300000, guid: 0ccaf9655e6f39e44be8aa215b2e8655, type: 3}
-  - {fileID: 21300000, guid: 207654311c32d3e41b51624d84beae08, type: 3}
-  - {fileID: 21300000, guid: 890481410efc67f489eca4ac500cd5e6, type: 3}
-  - {fileID: 21300000, guid: ad21193684df6bc49b3f1ea64d897134, type: 3}
-  - {fileID: 21300000, guid: 7744a7b745570e84cac4a348d3d33fe4, type: 3}
-  displayIcons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!4 &1404501253
 Transform:
   m_ObjectHideFlags: 0
