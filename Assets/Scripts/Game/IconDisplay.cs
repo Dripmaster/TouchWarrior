@@ -7,6 +7,7 @@ public class IconDisplay : MonoBehaviour
 {
     public int imageId;
     Image image;
+    bool isFliped;
     // Start is called before the first frame update
     void Awake()
     {
@@ -14,6 +15,7 @@ public class IconDisplay : MonoBehaviour
         {
             image = GetComponent<Image>();
         }
+        isFliped = false;
     }
 
     // Update is called once per frame
@@ -36,5 +38,52 @@ public class IconDisplay : MonoBehaviour
     public void fire()
     {
         image.color = Color.white;
+    }
+    public void flip(bool v)
+    {
+        if(v != isFliped)
+        StartCoroutine(flipAnim(v));
+        isFliped = v;
+    }
+    IEnumerator flipAnim(bool v)
+    {
+        Vector3 tempScale = transform.localScale;
+        int scaleDir = -1;
+        do
+        {
+            yield return null;
+
+            Vector3 targetScale = transform.localScale;
+            targetScale.x += scaleDir * 0.1f * Time.deltaTime * 90f;
+            transform.localScale = targetScale;
+            if (transform.localScale.x <= 0f)
+            {
+                if (v)
+                {
+                    image.sprite = GameManager.Instance.GetQusetionSprite();
+                }
+                else
+                {
+                    image.sprite = GameManager.Instance.GetSprite(imageId);
+
+                }
+                scaleDir *= -1;
+                break;
+            }
+        } while (true);
+
+        do
+        {
+            yield return null;
+
+            Vector3 targetScale = transform.localScale;
+            targetScale.x += scaleDir * 0.1f * Time.deltaTime * 90f;
+            transform.localScale = targetScale;
+            if (transform.localScale.x >= 1f)
+            {
+                transform.localScale = tempScale;
+                break;
+            }
+        } while (true);
     }
 }

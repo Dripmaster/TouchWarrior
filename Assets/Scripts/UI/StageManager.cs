@@ -8,7 +8,8 @@ public class StageManager : MonoBehaviour
     Text stageText;
     public int maxStage = 0;//0 = inf, other = 1~MaxStage
 
-
+    public SkillScript[] skills;
+    
     int currentStage;
 
     private void Awake()
@@ -46,9 +47,9 @@ public class StageManager : MonoBehaviour
             setText(currentStage);
             setStageBtn(currentStage);
             GameManager.Instance.clearIndex();
+            TimerManager.Instance.reCountTime();
+            checkSkill();
         }
-
-
         return isComplete;
     }
 
@@ -57,6 +58,16 @@ public class StageManager : MonoBehaviour
         foreach (var item in GameManager.Instance.displayIcons)
         {
             item.setImage(Random.Range(0, 5));
+        }
+    }
+    public void checkSkill()
+    {
+        foreach (var skill in skills)
+        {
+            if (currentStage%skill.popupStage == 0) {
+                //doSkill
+                GameManager.Instance.doSkill(skill.skillType);
+            }
         }
     }
 }
