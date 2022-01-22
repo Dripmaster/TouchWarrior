@@ -5,12 +5,37 @@ using UnityEngine.UI;
 
 public class TimerManager : MonoBehaviour
 {
+    private static TimerManager _instance;
+    public static TimerManager Instance
+    {
+        get
+        {
+            if (!_instance)
+            {
+                _instance = FindObjectOfType(typeof(TimerManager)) as TimerManager;
+
+                if (_instance == null)
+                    Debug.Log("no Singleton obj");
+            }
+            return _instance;
+        }
+    }
+
+
     public Image ForeBar;
     public Text TimeText;
     float limitTime;
     float timeValue;
     bool showTimeBar;
 
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +74,10 @@ public class TimerManager : MonoBehaviour
                 break;
             }
         } while (true);
+    }
+    public void reCountTime()
+    {
+        timeValue = 0;
     }
     public void reduceTime(float v)
     {
