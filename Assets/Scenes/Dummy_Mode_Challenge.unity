@@ -3645,6 +3645,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 890481410efc67f489eca4ac500cd5e6, type: 3}
   - {fileID: 21300000, guid: ad21193684df6bc49b3f1ea64d897134, type: 3}
   - {fileID: 21300000, guid: 7744a7b745570e84cac4a348d3d33fe4, type: 3}
+  displaybtnBackSprite: {fileID: 0}
+  displaybtnQusetionSprite: {fileID: 0}
   displayIcons:
   - {fileID: 880600820}
   - {fileID: 663619504}
@@ -3652,6 +3654,11 @@ MonoBehaviour:
   - {fileID: 1266390411}
   - {fileID: 286907289}
   - {fileID: 1498071724}
+  IconBtns: []
+  BtnPositions: []
+  popup_GameOverClear: {fileID: 0}
+  SwapObject1: []
+  SwapObject2: []
 --- !u!4 &1404501253
 Transform:
   m_ObjectHideFlags: 0
@@ -4356,6 +4363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxStage: 20
+  skills: []
 --- !u!224 &1754749073 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3042795576519838327, guid: fd89266bd777b654d9699014f00e7f8a, type: 3}
