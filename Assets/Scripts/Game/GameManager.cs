@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    StageManager stageManager;
+    public StageManager stageManager;
     public Sprite[] displaybtnSprites;
     public Sprite displaybtnBackSprite;
     public Sprite displaybtnQusetionSprite;
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
                     foreach (var sobj in SwapObject1)
                     {
                         //sobj.localPosition = new Vector3(sobj.localPosition.x,-150+(-150-sobj.localPosition.y));
-                        StartCoroutine(swapPos( sobj, new Vector3(sobj.localPosition.x, -150 + (-150 - sobj.localPosition.y))));
+                        StartCoroutine(swapPos( sobj, new Vector3(sobj.localPosition.x, -20 + (-20 - sobj.localPosition.y))));
                     }
                     foreach (var sobj in SwapObject2)
                     {

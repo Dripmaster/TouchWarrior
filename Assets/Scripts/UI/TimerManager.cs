@@ -39,7 +39,7 @@ public class TimerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        initTime(5,true);
+        initTime(7,true);
     }
 
     // Update is called once per frame
@@ -74,6 +74,14 @@ public class TimerManager : MonoBehaviour
                 break;
             }
         } while (true);
+    }
+    public float getLimitTime()
+    {
+        return limitTime;
+    }
+    public void changeLimit(float v)
+    {
+        limitTime = v;
     }
     public void reCountTime()
     {

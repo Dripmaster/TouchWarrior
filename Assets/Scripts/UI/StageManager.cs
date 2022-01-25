@@ -52,6 +52,10 @@ public class StageManager : MonoBehaviour
         }
         return isComplete;
     }
+    public int getStage()
+    {
+        return currentStage;
+    }
 
     public void setStageBtn(int s)
     {
