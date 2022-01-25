@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Button
+    uniqueID: 3217245729
+    locked: 0
+  - name: Effect
+    uniqueID: 1073406197
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: GUI
+    uniqueID: 1807776063
     locked: 0
