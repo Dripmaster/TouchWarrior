@@ -27,11 +27,26 @@ public class PopupManager : MonoBehaviour
 
     public void setPopup()
     {
-        yourScore.text = "0";//from stageManager
-        bestScore.text = "0";//from local
-        myCoin.text = "0";//from local
-        plusCoin.text = "0";//from stageManager or different Manager
-        highScore.SetActive(true);//compare currentScore vs bestScore
+
+        int high = SaveManager.getData("classicScore");
+        if (high < GameManager.Instance.stageManager.getStage())
+        {//highScore
+            SaveManager.saveData("classicScore", GameManager.Instance.stageManager.getStage());
+            highScore.SetActive(true);//compare currentScore vs bestScore
+        }
+        else
+        {
+            highScore.SetActive(false);//compare currentScore vs bestScore
+        }
+
+        yourScore.text = ""+GameManager.Instance.stageManager.getStage();//from stageManager
+        bestScore.text = ""+ SaveManager.getData("classicScore");//from local
+        myCoin.text = ""+SaveManager.getData("gold");//from local
+        plusCoin.text = ""+ GameManager.Instance.stageManager.getStage();//from stageManager or different Manager
+
+        int gold = SaveManager.getData("gold");
+        gold += GameManager.Instance.stageManager.getStage();
+        SaveManager.saveData("gold", gold);
     }
     public void continueBtn()
     {
