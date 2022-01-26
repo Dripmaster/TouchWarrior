@@ -95,12 +95,7 @@ public class GameManager : MonoBehaviour
         {//correct Effect Here
             displayIcons[currentIndex].fire();
             currentIndex++;
-            if (currentIndex >= (stageManager.isBoss ? displayIcons.Length : displayIcons.Length - displayIconsBoss.Length))
-            {
-                textEffect.Create();
-                stageManager.checkSkill();
-                stageManager.timerStop(true);
-            }
+            
         }
         else//miss
         {
@@ -108,17 +103,53 @@ public class GameManager : MonoBehaviour
             timeOut();
         }
     }
+    public void checkNext()
+    {
+        if (currentIndex >= (stageManager.isBoss ? displayIcons.Length : displayIcons.Length - displayIconsBoss.Length))
+        {
+            toNext();
+        }
+    }
+    public void toNext()
+    {
+        textEffect.Create();
+        stageManager.checkSkill();
+        stageManager.timerStop(true);
+    }
     public void startNext()
     {
-
+        
+        foreach (var item in displayIcons)
+        {
+            item.hide();
+        }
+        StartCoroutine(startNextC());
+    }
+    IEnumerator startNextC()
+    {
+        bool dododododo = true;
+        do
+        {
+            yield return null;
+            dododododo = false;
+            foreach (var item in displayIcons)
+            {
+                if (item.transform.parent.gameObject.activeInHierarchy)
+                {
+                    dododododo = true;
+                }
+            }
+        } while (dododododo);
+        startNextReal();
+    }
+    public void startNextReal()
+    {
         isStageClear = stageManager.UpStage(); // max stage clear
         stageManager.timerStop(false);
     }
     public void cheatClick()
     {
-        textEffect.Create();
-        stageManager.checkSkill();
-        stageManager.timerStop(true);
+        toNext();
     }
     public void clearIndex()
     {
@@ -213,7 +244,7 @@ public class GameManager : MonoBehaviour
                 icon.flip(i % 2 == 0);
             }
             i++;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(TimerManager.Instance.getLimitTime()/7);
             if (stageManager.getStage() >= endStage)
                 break;
         } while (true);
