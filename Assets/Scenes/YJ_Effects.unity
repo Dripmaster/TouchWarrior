@@ -468,6 +468,7 @@ MonoBehaviour:
   - {fileID: 1140383502}
   - {fileID: 803279412}
   - {fileID: 204578561}
+  displayIconsBoss: []
   IconBtns:
   - {fileID: 36610331}
   - {fileID: 1618974397}
@@ -5076,7 +5077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6574,8 +6575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxStage: 0
-  skills:
-  - {fileID: 11400000, guid: d41c761473147154d8f8993e6c70cd90, type: 2}
+  isBoss: 0
 --- !u!114 &1911572261
 MonoBehaviour:
   m_ObjectHideFlags: 0

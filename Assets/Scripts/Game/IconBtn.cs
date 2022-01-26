@@ -52,7 +52,7 @@ public class IconBtn : MonoBehaviour
     public void FlipIcon(bool clear = false)
     {
        //StopAllCoroutines();
-        StartCoroutine(flipAnim());
+        StartCoroutine(flipAnim(clear));
     }
     IEnumerator moveAnim(Vector3 targetPos)
     {
@@ -71,7 +71,7 @@ public class IconBtn : MonoBehaviour
         } while (true);
     }
 
-    IEnumerator flipAnim()
+    IEnumerator flipAnim(bool clear)
     {
         Vector3 tempScale = transform.localScale;
         int scaleDir = -1;
@@ -84,7 +84,12 @@ public class IconBtn : MonoBehaviour
             transform.localScale = targetScale;
             if (transform.localScale.x <= 0f)
             {
+                if(!clear)
                 image.sprite = GameManager.Instance.GetBackSprite();
+                else
+                {
+                    image.sprite = GameManager.Instance.GetSprite(imageId);
+                }
                 scaleDir *= -1;
                 break;
             }

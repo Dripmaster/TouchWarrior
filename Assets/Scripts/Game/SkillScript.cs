@@ -14,9 +14,9 @@ public class SkillScript : ScriptableObject
 }
 public enum SkillType
 {
-    flip = 0,
+     swap = 0,
     move = 1,
-    swap = 2,
+    flip = 2,
     bounce = 3,
     boss = 4,
 }
