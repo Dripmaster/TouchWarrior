@@ -8,6 +8,7 @@ public class IconDisplay : MonoBehaviour
     public int imageId;
     Image image;
     bool isFliped;
+    public Animator anim;
     // Start is called before the first frame update
     void Awake()
     {
@@ -16,6 +17,7 @@ public class IconDisplay : MonoBehaviour
             image = GetComponent<Image>();
         }
         isFliped = false;
+        anim = GetComponentInParent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,20 +27,16 @@ public class IconDisplay : MonoBehaviour
     }
     public void show()
     {
-        if (image == null)
-        {
-            image = GetComponent<Image>();
-        }
-        image.color = Color.white;
-        GetComponentInParent<Animator>().SetTrigger("Create");
+
+        transform.parent.gameObject.SetActive(true);
+        isFliped = false;
     }
     public void hide()
     {
-        if (image == null)
-        {
-            image = GetComponent<Image>();
-        }
-        image.color = new Color(0,0,0,0);
+        if (!transform.parent.gameObject.activeInHierarchy)
+            return;
+
+        anim.SetTrigger("Destroy");
     }
     public void setImage(int i)
     {
@@ -55,22 +53,31 @@ public class IconDisplay : MonoBehaviour
     public void fire()
     {
         //correct and disappear effect Here
-
-        GetComponentInParent<Animator>().SetTrigger("Destroy");
+        GetComponentInParent<GameBtn>().isFlipcorrect = true;
+        flip(true);
     }
     public void flip(bool v,bool Forceanim = false)
     {
         if(v != isFliped || Forceanim)
             //StartCoroutine(flipAnim(v));
-            GetComponentInParent<Animator>().SetTrigger("Flip");
+            anim.SetTrigger("Flip");
         isFliped = v;
     }
-    public void flipOk()
+    public void flipOk(bool isf)
     {
 
         if (isFliped)
         {
-            image.sprite = GameManager.Instance.GetQusetionSprite();
+            if (isf)
+            {
+                image.sprite = GameManager.Instance.GetBackSprite();
+                GameManager.Instance.checkNext();
+            }
+            else
+            {
+
+                image.sprite = GameManager.Instance.GetQusetionSprite();
+            }
         }
         else
         {

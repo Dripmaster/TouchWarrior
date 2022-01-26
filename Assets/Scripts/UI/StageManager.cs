@@ -20,10 +20,6 @@ public class StageManager : MonoBehaviour
     {
         isBoss = false;
         currentStage = 0;
-        foreach (var btn in GameManager.Instance.displayIconsBoss)
-        {
-            btn.hide();
-        }
         UpStage();
     }
 
@@ -237,10 +233,6 @@ public class StageManager : MonoBehaviour
     public void endBoss()
     {
         //boss stage effect end Here
-        foreach (var btn in GameManager.Instance.displayIconsBoss)
-        {
-            btn.hide();
-        }
         isBoss = false;
     }
     public bool isBoss;

@@ -74,9 +74,9 @@ public class IconBtn : MonoBehaviour
         do
         {
             yield return null;
-            dt += Time.deltaTime;
+            dt += Time.deltaTime*2;
             transform.parent.position = Vector3.Lerp(tmpPos, targetPos, dt);
-            if (dt >= 1)
+            if (dt >= 0.5f)
             {
                 transform.parent.position = targetPos;
                 break;
