@@ -54,17 +54,17 @@ public class IconBtn : MonoBehaviour
     {
        //StopAllCoroutines();
         StartCoroutine(flipAnim(clear));
-        isFlip = clear;
+        isFlip = !clear;
     }
     public void FlipOk()
     {
         if (isFlip)
         {
-            image.sprite = GameManager.Instance.GetSprite(imageId);
+            image.sprite = GameManager.Instance.GetBackSprite();
         }
         else
         {
-            image.sprite = GameManager.Instance.GetBackSprite();
+            image.sprite = GameManager.Instance.GetSprite(imageId);
         }
     }
     IEnumerator moveAnim(Vector3 targetPos)
