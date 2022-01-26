@@ -65,9 +65,13 @@ public class StageManager : MonoBehaviour
     }
     IEnumerator setStageBtn()
     {
+        int i = 0;
         foreach (var item in GameManager.Instance.displayIcons)
         {
-            item.flip(false, true);
+            i++;
+            if (!isBoss&& i > 6)
+                break;
+            item.show();
             item.setImage(Random.Range(0, 6));
             yield return new WaitForSeconds(0.1f);
         }
@@ -225,10 +229,6 @@ public class StageManager : MonoBehaviour
         {
             TimerManager.Instance.changeLimit(TimerManager.Instance.getLimitTime() * 2f);//effect Here?
 
-        }
-        foreach (var btn in GameManager.Instance.displayIconsBoss)
-        {
-            btn.show();
         }
     }
     public void endBoss()
