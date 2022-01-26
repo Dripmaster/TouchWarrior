@@ -80,7 +80,7 @@ public class TimerManager : MonoBehaviour
         return limitTime;
     }
     public void changeLimit(float v)
-    {
+    {//effect here?
         limitTime = v;
     }
     public void reCountTime()

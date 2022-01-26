@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public Sprite displaybtnBackSprite;
     public Sprite displaybtnQusetionSprite;
     public IconDisplay[] displayIcons;
+    public IconDisplay[] displayIconsBoss;
     public IconBtn[] IconBtns;
     public Transform[] BtnPositions;
     bool[] BtnPositions_occupied;
@@ -52,7 +53,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                //cheatClick();
+                stageManager.UpStage();
+            }
+        }
     }
     public void setOccupied(int posid, bool value) {
        if( BtnPositions_occupied ==null)
@@ -84,7 +92,7 @@ public class GameManager : MonoBehaviour
         {
             displayIcons[currentIndex].fire();
             currentIndex++;
-            if (currentIndex >= displayIcons.Length)
+            if (currentIndex >= (stageManager.isBoss ? displayIcons.Length : displayIcons.Length - displayIconsBoss.Length))
             {
                 isStageClear = stageManager.UpStage(); // max stage clear
             }
@@ -92,6 +100,15 @@ public class GameManager : MonoBehaviour
         else//miss
         {
             timeOut();
+        }
+    }
+    public void cheatClick()
+    {
+        displayIcons[currentIndex].fire();
+        currentIndex++;
+        if (currentIndex >= (stageManager.isBoss ? displayIcons.Length : displayIcons.Length - displayIconsBoss.Length))
+        {
+            isStageClear = stageManager.UpStage(); // max stage clear
         }
     }
     public void clearIndex()
@@ -110,10 +127,7 @@ public class GameManager : MonoBehaviour
         {
             case SkillType.flip:
                 {
-                    foreach (var icon in IconBtns)
-                    {
-                        icon.FlipIcon();
-                    }
+                    StartCoroutine(flipCards());
                 }
                 break;
             case SkillType.move:
@@ -155,16 +169,30 @@ public class GameManager : MonoBehaviour
                 break;
             case SkillType.bounce:
                 {
-                    StartCoroutine(bounceCard());
+                    if (bounceCoroutine != null)
+                        StopCoroutine(bounceCoroutine);
+                    bounceCoroutine = StartCoroutine(bounceCard());
                 }
                 break;
             case SkillType.boss:
+                {
+                    stageManager.nowBoss();
+                }
                 break;
         }
     }
+    Coroutine bounceCoroutine;
     IEnumerator bounceCard()
     {
         int i = 0;
+
+        int endStage = stageManager.getStage();
+        if (endStage > 100)
+            endStage += 3;
+        else if (endStage > 50)
+            endStage += 2;
+        else
+            endStage += 1;
         do
         {
             foreach (var icon in displayIcons)
@@ -174,9 +202,14 @@ public class GameManager : MonoBehaviour
                 icon.flip(i % 2 == 0);
             }
             i++;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
+            if (stageManager.getStage() >= endStage)
+                break;
         } while (true);
-
+        foreach (var icon in displayIcons)
+        {
+            icon.flip(false);
+        }
     }
 
     IEnumerator swapPos(RectTransform r, Vector3 targetpos)
@@ -195,5 +228,37 @@ public class GameManager : MonoBehaviour
                 break;
             }
         } while (true);
+    }
+
+    IEnumerator flipCards()
+    {
+        int endStage = stageManager.getStage();
+
+        if (endStage > 169)
+            endStage += 2;
+        else
+            endStage += 1;
+
+
+      foreach (var icon in IconBtns)
+      {
+            icon.FlipIcon();
+            yield return new WaitForSeconds(0.1f);
+      }
+
+        do
+        {
+            yield return null;
+            if (stageManager.getStage() >=endStage)
+            {
+                break;
+            }
+        } while (true);
+
+
+        foreach (var icon in IconBtns)
+        {
+            icon.FlipIcon(true);
+        }
     }
 }

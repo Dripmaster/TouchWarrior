@@ -23,25 +23,41 @@ public class IconDisplay : MonoBehaviour
     {
         
     }
-
+    public void show()
+    {
+        if (image == null)
+        {
+            image = GetComponent<Image>();
+        }
+        image.color = Color.white;
+    }
+    public void hide()
+    {
+        if (image == null)
+        {
+            image = GetComponent<Image>();
+        }
+        image.color = new Color(0,0,0,0);
+    }
     public void setImage(int i)
     {
+        //generate effect Here
         if (image == null)
         {
             image = GetComponent<Image>();
         }
         imageId = i;
         image.sprite =  GameManager.Instance.GetSprite(i);
-        image.color = Color.yellow;
+
     }
 
     public void fire()
     {
-        image.color = Color.white;
+        //correct and disappear effect Here
     }
-    public void flip(bool v)
+    public void flip(bool v,bool Forceanim = false)
     {
-        if(v != isFliped)
+        if(v != isFliped || Forceanim)
         StartCoroutine(flipAnim(v));
         isFliped = v;
     }
