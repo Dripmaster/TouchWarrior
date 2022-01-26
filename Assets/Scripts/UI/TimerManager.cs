@@ -52,6 +52,7 @@ public class TimerManager : MonoBehaviour
     {
         limitTime = l;
         showTimeBar = show;
+        Stopped = false;
         StopAllCoroutines();
         StartCoroutine(countTimer());
     }
@@ -61,6 +62,8 @@ public class TimerManager : MonoBehaviour
         do
         {
             yield return null;
+            if (Stopped)
+                continue;
             timeValue += Time.deltaTime;
             if (showTimeBar)
             {
@@ -75,6 +78,11 @@ public class TimerManager : MonoBehaviour
             }
         } while (true);
     }
+    public void timeStop(bool v)
+    {
+        Stopped = v;
+    }
+    bool Stopped;
     public float getLimitTime()
     {
         return limitTime;
