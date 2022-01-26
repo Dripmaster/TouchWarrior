@@ -40,8 +40,6 @@ public class StageManager : MonoBehaviour
     {
         bool isComplete = false;
 
-        if (isBoss)
-            endBoss();
         currentStage++;
         if (maxStage!=0&&(currentStage > maxStage))
         {
@@ -50,7 +48,6 @@ public class StageManager : MonoBehaviour
         }
         else
         {
-            checkSkill();
             checkTimer();
             setText(currentStage);
             StartCoroutine(setStageBtn());
@@ -58,6 +55,10 @@ public class StageManager : MonoBehaviour
             TimerManager.Instance.reCountTime();
         }
         return isComplete;
+    }
+    public void timerStop(bool v)
+    {
+        TimerManager.Instance.timeStop(v);
     }
     public int getStage()
     {
@@ -146,14 +147,16 @@ public class StageManager : MonoBehaviour
     }
     public void checkSkill()
     {
-        if(currentStage%10 == 0)
+        if (isBoss)
+            endBoss();
+        if( (currentStage+1)%10 == 0)
         {
             GameManager.Instance.doSkill(SkillType.boss);
         }
 
-        if (currentStage > 199)
+        if ((currentStage + 1) > 199)
         {
-            switch (currentStage % 10)
+            switch ((currentStage + 1) % 10)
             {
                 case 2:
                 case 4:
@@ -164,9 +167,9 @@ public class StageManager : MonoBehaviour
                     break;
             }
         }
-        else if(currentStage > 151)
+        else if((currentStage + 1) > 151)
         {
-            switch (currentStage % 10)
+            switch ((currentStage + 1) % 10)
             {
                 case 2:
                 case 5:
@@ -177,9 +180,9 @@ public class StageManager : MonoBehaviour
             }
 
         }
-        else if (currentStage > 102)
+        else if ((currentStage + 1) > 102)
         {
-            switch (currentStage%10)
+            switch ((currentStage + 1) % 10)
             {
                 case 3:
                 case 6:
@@ -188,15 +191,15 @@ public class StageManager : MonoBehaviour
                     break;
             }
         }
-        else if (currentStage > 54)
+        else if ((currentStage + 1) > 54)
         {
             if(currentStage%5 == 0)
             {
                 GameManager.Instance.doSkill((SkillType)Random.Range(0, 4));
             }
-        }else if (currentStage>14)
+        }else if ((currentStage + 1) > 14)
         {
-            switch (currentStage)
+            switch ((currentStage + 1))
             {
                 case 15:
                 case 32:

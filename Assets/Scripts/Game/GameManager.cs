@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public IconDisplay[] displayIconsBoss;
     public IconBtn[] IconBtns;
     public Transform[] BtnPositions;
+    public TextEffectEnd textEffect;
     bool[] BtnPositions_occupied;
 
     public PopupManager popup_GameOverClear;
@@ -58,7 +59,9 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A))
             {
                 //cheatClick();
-                stageManager.UpStage();
+                textEffect.Create();
+                stageManager.checkSkill();
+                stageManager.timerStop(true);
             }
         }
     }
@@ -94,22 +97,28 @@ public class GameManager : MonoBehaviour
             currentIndex++;
             if (currentIndex >= (stageManager.isBoss ? displayIcons.Length : displayIcons.Length - displayIconsBoss.Length))
             {
-                isStageClear = stageManager.UpStage(); // max stage clear
+                textEffect.Create();
+                stageManager.checkSkill();
+                stageManager.timerStop(true);
             }
         }
         else//miss
         {
+            stageManager.timerStop(true);
             timeOut();
         }
     }
+    public void startNext()
+    {
+
+        isStageClear = stageManager.UpStage(); // max stage clear
+        stageManager.timerStop(false);
+    }
     public void cheatClick()
     {
-        displayIcons[currentIndex].fire();
-        currentIndex++;
-        if (currentIndex >= (stageManager.isBoss ? displayIcons.Length : displayIcons.Length - displayIconsBoss.Length))
-        {
-            isStageClear = stageManager.UpStage(); // max stage clear
-        }
+        textEffect.Create();
+        stageManager.checkSkill();
+        stageManager.timerStop(true);
     }
     public void clearIndex()
     {
@@ -185,6 +194,7 @@ public class GameManager : MonoBehaviour
     Coroutine bounceCoroutine;
     IEnumerator bounceCard()
     {
+        yield return new WaitForSeconds(1);
         int i = 0;
 
         int endStage = stageManager.getStage();
@@ -233,7 +243,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator flipCards()
     {
-        int endStage = stageManager.getStage();
+        int endStage = stageManager.getStage()+1;
 
         if (endStage > 169)
             endStage += 2;
