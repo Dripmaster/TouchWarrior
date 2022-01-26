@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         if (isStageClear) return;
 
         if(displayIcons[currentIndex].imageId == imgId)//correct
-        {
+        {//correct Effect Here
             displayIcons[currentIndex].fire();
             currentIndex++;
             if (currentIndex >= (stageManager.isBoss ? displayIcons.Length : displayIcons.Length - displayIconsBoss.Length))
@@ -162,8 +162,9 @@ public class GameManager : MonoBehaviour
                     }
                     foreach (var sobj in SwapObject2)
                     {
+                        //var soj = sobj.GetComponentInParent<RectTransform>();
                         //sobj.localPosition = new Vector3(sobj.localPosition.x, -80+ (-80 - sobj.localPosition.y));
-                        StartCoroutine(swapPos( sobj, new Vector3(sobj.localPosition.x, -80 + (-80 - sobj.localPosition.y))));
+                        StartCoroutine(swapPos(sobj, new Vector3(sobj.localPosition.x, -80 + (-80 - sobj.localPosition.y))));
                     }
                 }
                 break;

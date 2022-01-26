@@ -9,6 +9,7 @@ public class IconBtn : MonoBehaviour
     public int PosId;
     Image image;
     Button button;
+    bool isFlip;
     // Start is called before the first frame update
     void Awake()
     {
@@ -43,7 +44,7 @@ public class IconBtn : MonoBehaviour
     public void setPos(int i,bool anim = false)
     {
         if(!anim)
-            transform.position = GameManager.Instance.BtnPositions[i].position;
+            transform.parent.position = GameManager.Instance.BtnPositions[i].position;
         else
         {
             StartCoroutine(moveAnim(GameManager.Instance.BtnPositions[i].position));
@@ -53,6 +54,18 @@ public class IconBtn : MonoBehaviour
     {
        //StopAllCoroutines();
         StartCoroutine(flipAnim(clear));
+        isFlip = clear;
+    }
+    public void FlipOk()
+    {
+        if (isFlip)
+        {
+            image.sprite = GameManager.Instance.GetSprite(imageId);
+        }
+        else
+        {
+            image.sprite = GameManager.Instance.GetBackSprite();
+        }
     }
     IEnumerator moveAnim(Vector3 targetPos)
     {
@@ -62,10 +75,10 @@ public class IconBtn : MonoBehaviour
         {
             yield return null;
             dt += Time.deltaTime;
-            transform.position = Vector3.Lerp(tmpPos, targetPos, dt);
+            transform.parent.position = Vector3.Lerp(tmpPos, targetPos, dt);
             if (dt >= 1)
             {
-                transform.position = targetPos;
+                transform.parent.position = targetPos;
                 break;
             }
         } while (true);
@@ -73,40 +86,7 @@ public class IconBtn : MonoBehaviour
 
     IEnumerator flipAnim(bool clear)
     {
-        Vector3 tempScale = transform.localScale;
-        int scaleDir = -1;
-        do
-        {
-            yield return null;
-
-            Vector3 targetScale = transform.localScale;
-            targetScale.x +=scaleDir* 0.1f * Time.deltaTime*30f;
-            transform.localScale = targetScale;
-            if (transform.localScale.x <= 0f)
-            {
-                if(!clear)
-                image.sprite = GameManager.Instance.GetBackSprite();
-                else
-                {
-                    image.sprite = GameManager.Instance.GetSprite(imageId);
-                }
-                scaleDir *= -1;
-                break;
-            }
-        } while (true);
-
-        do
-        {
-            yield return null;
-
-            Vector3 targetScale = transform.localScale;
-            targetScale.x += scaleDir * 0.1f * Time.deltaTime * 30f;
-            transform.localScale = targetScale;
-            if (transform.localScale.x >= 1f)
-            {
-                transform.localScale = tempScale;
-                break;
-            }
-        } while (true);
+        GetComponentInParent<Animator>().SetTrigger("Flip");
+        yield return null;
     }
 }

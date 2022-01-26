@@ -30,6 +30,7 @@ public class IconDisplay : MonoBehaviour
             image = GetComponent<Image>();
         }
         image.color = Color.white;
+        GetComponentInParent<Animator>().SetTrigger("Create");
     }
     public void hide()
     {
@@ -54,52 +55,26 @@ public class IconDisplay : MonoBehaviour
     public void fire()
     {
         //correct and disappear effect Here
+
+        GetComponentInParent<Animator>().SetTrigger("Destroy");
     }
     public void flip(bool v,bool Forceanim = false)
     {
         if(v != isFliped || Forceanim)
-        StartCoroutine(flipAnim(v));
+            //StartCoroutine(flipAnim(v));
+            GetComponentInParent<Animator>().SetTrigger("Flip");
         isFliped = v;
     }
-    IEnumerator flipAnim(bool v)
+    public void flipOk()
     {
-        Vector3 tempScale = transform.localScale;
-        int scaleDir = -1;
-        do
+
+        if (isFliped)
         {
-            yield return null;
-
-            Vector3 targetScale = transform.localScale;
-            targetScale.x += scaleDir * 0.1f * Time.deltaTime * 90f;
-            transform.localScale = targetScale;
-            if (transform.localScale.x <= 0f)
-            {
-                if (v)
-                {
-                    image.sprite = GameManager.Instance.GetQusetionSprite();
-                }
-                else
-                {
-                    image.sprite = GameManager.Instance.GetSprite(imageId);
-
-                }
-                scaleDir *= -1;
-                break;
-            }
-        } while (true);
-
-        do
+            image.sprite = GameManager.Instance.GetQusetionSprite();
+        }
+        else
         {
-            yield return null;
-
-            Vector3 targetScale = transform.localScale;
-            targetScale.x += scaleDir * 0.1f * Time.deltaTime * 90f;
-            transform.localScale = targetScale;
-            if (transform.localScale.x >= 1f)
-            {
-                transform.localScale = tempScale;
-                break;
-            }
-        } while (true);
+            image.sprite = GameManager.Instance.GetSprite(imageId);
+        }
     }
 }
