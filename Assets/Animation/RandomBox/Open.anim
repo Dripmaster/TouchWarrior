@@ -1886,7 +1886,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 3.0166667
-    functionName: 
+    functionName: openOk
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

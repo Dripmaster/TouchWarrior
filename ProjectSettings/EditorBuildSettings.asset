@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/TW_Popup.unity
     guid: cca6158404e144749958e9cacd4b96fa
   - enabled: 1
-    path: Assets/Scenes/TW_RandomBox_Packing.unity
-    guid: f711525acb6313a47a49ac772a3f50a4
+    path: Assets/Scenes/YJ_RandomboxEffect.unity
+    guid: 3656232e4a2dc1343b85f69774c14bc4
   - enabled: 1
     path: Assets/Scenes/TW_Collection.unity
     guid: fda9dc7653c15ff4e99c10c34bbfce89
