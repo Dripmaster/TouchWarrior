@@ -89,7 +89,10 @@ public class TimerManager : MonoBehaviour
     }
     public void changeLimit(float v)
     {//effect here?
+        float ratio = v/limitTime;
+
         limitTime = v;
+        timeValue *= ratio;
     }
     public IEnumerator TimeReCount()
     {
