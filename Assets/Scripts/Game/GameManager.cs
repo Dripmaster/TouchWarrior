@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     public RectTransform[] SwapObject1;
     public RectTransform[] SwapObject2;
-
+    bool isPlayStage;
     private void Awake()
     {
         if (_instance == null)
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         }
         stageManager = FindObjectOfType(typeof(StageManager)) as StageManager;
         isStageClear = false;
+        isPlayStage = false;
     }
 
     // Update is called once per frame
@@ -58,10 +59,7 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                //cheatClick();
-                textEffect.Create();
-                stageManager.checkSkill();
-                stageManager.timerStop(true);
+                toNext();
             }
         }
     }
@@ -90,6 +88,7 @@ public class GameManager : MonoBehaviour
     public void onBtnClicked(int imgId)
     {
         if (isStageClear) return;
+        if (!isPlayStage) return;
 
         if(displayIcons[currentIndex].imageId == imgId)//correct
         {//correct Effect Here
@@ -113,8 +112,8 @@ public class GameManager : MonoBehaviour
     public void toNext()
     {
         textEffect.Create();
-        stageManager.checkSkill();
         stageManager.timerStop(true);
+        isPlayStage = false;
     }
     public void startNext()
     {
@@ -140,12 +139,18 @@ public class GameManager : MonoBehaviour
                 }
             }
         } while (dododododo);
-        startNextReal();
+        bool isSkillStage = stageManager.checkSkill();
+        if (!isSkillStage)
+            startNextReal();
     }
     public void startNextReal()
     {
         isStageClear = stageManager.UpStage(); // max stage clear
+    }
+    public void startNextStageReal()
+    {
         stageManager.timerStop(false);
+        isPlayStage = true;
     }
     public void cheatClick()
     {
@@ -195,13 +200,17 @@ public class GameManager : MonoBehaviour
                 break;
             case SkillType.swap:
                 {
+                    swapCout = 0;
+                    swapMaxCount = 0;
                     foreach (var sobj in SwapObject1)
                     {
+                        swapMaxCount++;
                         //sobj.localPosition = new Vector3(sobj.localPosition.x,-150+(-150-sobj.localPosition.y));
                         StartCoroutine(swapPos( sobj, new Vector3(sobj.localPosition.x, -20 + (-20 - sobj.localPosition.y))));
                     }
                     foreach (var sobj in SwapObject2)
                     {
+                        swapMaxCount++;
                         //var soj = sobj.GetComponentInParent<RectTransform>();
                         //sobj.localPosition = new Vector3(sobj.localPosition.x, -80+ (-80 - sobj.localPosition.y));
                         StartCoroutine(swapPos(sobj, new Vector3(sobj.localPosition.x, -80 + (-80 - sobj.localPosition.y))));
@@ -253,10 +262,10 @@ public class GameManager : MonoBehaviour
             icon.flip(false);
         }
     }
-
+    int swapMaxCount;
+    int swapCout;
     IEnumerator swapPos(RectTransform r, Vector3 targetpos)
     {
-
         Vector3 tmpPos = r.localPosition;
         float dt = 0;
         do
@@ -270,6 +279,9 @@ public class GameManager : MonoBehaviour
                 break;
             }
         } while (true);
+        swapCout++;
+        if(swapCout>=swapMaxCount)
+            startNextReal();
     }
 
     IEnumerator flipCards()
@@ -287,6 +299,7 @@ public class GameManager : MonoBehaviour
             icon.FlipIcon();
             yield return new WaitForSeconds(0.1f);
       }
+        startNextReal();
 
         do
         {

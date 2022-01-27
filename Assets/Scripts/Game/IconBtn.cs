@@ -82,6 +82,7 @@ public class IconBtn : MonoBehaviour
                 break;
             }
         } while (true);
+        GameManager.Instance.startNextReal();
     }
 
     IEnumerator flipAnim(bool clear)

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
-
+    public Animator openAnim;
 
     public void Btn_Classic()
     {
@@ -14,6 +14,10 @@ public class TitleManager : MonoBehaviour
     public void Btn_Challenge()
     {
 
+    }
+    public void Btn_Open()
+    {
+        openAnim.SetTrigger("Open");
     }
     public void Btn_Title()
     {

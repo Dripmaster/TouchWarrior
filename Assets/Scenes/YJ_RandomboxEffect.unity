@@ -627,6 +627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75be5da9007903747b14f34f4db54d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openAnim: {fileID: 1403294636}
 --- !u!4 &423722830
 Transform:
   m_ObjectHideFlags: 0
@@ -639,7 +640,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &523738189
 GameObject:
@@ -956,7 +957,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 831194124}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 423722829}
+        m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
+        m_MethodName: Btn_Collection
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &831194124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,7 +1262,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 908969401}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 423722829}
+        m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
+        m_MethodName: Btn_Open
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &908969401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1370,7 +1395,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 926947049}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 423722829}
+        m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
+        m_MethodName: Btn_Open
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &926947049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1617,72 +1654,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210773576}
   m_CullTransparentMesh: 1
---- !u!1 &1225566463
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1225566465}
-  - component: {fileID: 1225566464}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1225566464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1225566463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e2178e5e789c04ca81f1ef6a5face8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stageManager: {fileID: 0}
-  displaybtnSprites:
-  - {fileID: 21300000, guid: bf8af40042adab244ae474415d745a9d, type: 3}
-  - {fileID: 21300000, guid: 0ccaf9655e6f39e44be8aa215b2e8655, type: 3}
-  - {fileID: 21300000, guid: 207654311c32d3e41b51624d84beae08, type: 3}
-  - {fileID: 21300000, guid: 890481410efc67f489eca4ac500cd5e6, type: 3}
-  - {fileID: 21300000, guid: ad21193684df6bc49b3f1ea64d897134, type: 3}
-  - {fileID: 21300000, guid: 7744a7b745570e84cac4a348d3d33fe4, type: 3}
-  displaybtnBackSprite: {fileID: 0}
-  displaybtnQusetionSprite: {fileID: 0}
-  displayIcons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  displayIconsBoss: []
-  IconBtns: []
-  BtnPositions: []
-  popup_GameOverClear: {fileID: 0}
-  SwapObject1: []
-  SwapObject2: []
---- !u!4 &1225566465
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1225566463}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1356008829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,6 +1739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1403294635}
   - component: {fileID: 1403294636}
+  - component: {fileID: 1403294637}
   m_Layer: 5
   m_Name: BoxParent
   m_TagString: Untagged
@@ -1824,6 +1796,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1403294637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403294634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e3e80ec1b162c46877521e5a300c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1463887082
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,7 +2082,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 423722829}
         m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
         m_MethodName: Btn_Collection
         m_Mode: 1
