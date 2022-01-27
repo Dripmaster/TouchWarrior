@@ -7,6 +7,11 @@ public class TitleManager : MonoBehaviour
 {
     public Animator openAnim;
 
+
+    public void SetButtonSet(int i)
+    {
+        PlayerPrefs.SetInt("ButtonSets",i);
+    }
     public void Btn_Classic()
     {
 

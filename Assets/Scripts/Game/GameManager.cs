@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     public StageManager stageManager;
     public Sprite[] displaybtnSprites;
+    public ButtonSetArray btnSet;
     public Sprite displaybtnBackSprite;
     public Sprite displaybtnQusetionSprite;
     public IconDisplay[] displayIcons;
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
     bool isPlayStage;
     private void Awake()
     {
+        imgSetReady = false;
         if (_instance == null)
         {
             _instance = this;
@@ -50,8 +52,9 @@ public class GameManager : MonoBehaviour
         stageManager = FindObjectOfType(typeof(StageManager)) as StageManager;
         isStageClear = false;
         isPlayStage = false;
+        
     }
-
+    bool imgSetReady;
     // Update is called once per frame
     void Update()
     {
@@ -72,6 +75,9 @@ public class GameManager : MonoBehaviour
     }
     public Sprite GetSprite(int id)
     {
+        if(!imgSetReady)
+        displaybtnSprites = btnSet.buttonSets[PlayerPrefs.GetInt("ButtonSets", 0)].imgSet;
+        imgSetReady = true;
         if (id < 0)
             return null;
         return displaybtnSprites[id];
