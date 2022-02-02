@@ -66,6 +66,8 @@ public class StageManager : MonoBehaviour
             bossIcon.SetActive(false);
         }
         checkTimer();
+        if (currentStage == 1)
+            SoundManager.Instance.playOneShot(0);
         StartCoroutine(TimerManager.Instance.TimeReCount());
         yield return StartCoroutine(setStageBtn());
         GameManager.Instance.clearIndex();
@@ -222,6 +224,7 @@ public class StageManager : MonoBehaviour
         {
             if(currentStage%5 == 0)
             {
+                isSkillStage = true;
                 GameManager.Instance.doSkill((SkillType)Random.Range(0, 4));
             }
         }else if ((currentStage + 1) > 5)
@@ -251,21 +254,20 @@ public class StageManager : MonoBehaviour
     public void nowBoss()
     {
         isBoss = true;
-        if (currentStage < 50)
+        if (currentStage < 30)
         {
             TimerManager.Instance.changeLimit(TimerManager.Instance.getLimitTime() * 1.75f);//effect Here?
+            GameManager.Instance.startNextReal();
         }
         else
         {
             TimerManager.Instance.changeLimit(TimerManager.Instance.getLimitTime() * 2f);//effect Here?
 
         }
-        GameManager.Instance.startNextReal();
     }
     public void endBoss()
     {
 
-        SoundManager.Instance.playOneShot(2);
         //boss stage effect end Here
         isBoss = false;
     }

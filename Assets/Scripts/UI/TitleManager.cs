@@ -7,6 +7,10 @@ public class TitleManager : MonoBehaviour
 {
     public Animator openAnim;
 
+    private void Awake()
+    {
+        SoundManager.Instance.playBGM(0);
+    }
 
     public void SetButtonSet(int i)
     {
