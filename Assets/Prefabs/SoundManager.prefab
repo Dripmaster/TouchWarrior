@@ -55,6 +55,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d495347e53892c24a9f9c6690ef7da36, type: 3}
   - {fileID: 8300000, guid: b330309e84b8981459d320563058dff6, type: 3}
   - {fileID: 8300000, guid: 141fdb3b1114da74eb24d3c9f09c42d1, type: 3}
+  - {fileID: 8300000, guid: a364dd62c32ae0a47ae194cd4f17691f, type: 3}
+  - {fileID: 8300000, guid: 9d9ed57e2432d834f934c32e4bff697e, type: 3}
   BGMClips:
   - {fileID: 8300000, guid: 8ccb185756203924780317171238805a, type: 3}
   - {fileID: 8300000, guid: 9d1411cc013a1ee4e875455b42484346, type: 3}

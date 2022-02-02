@@ -18,6 +18,7 @@ public class SoundManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         isBGMJ = false;
+        volume = 1;
     }
     public static SoundManager Instance
     {
@@ -36,9 +37,10 @@ public class SoundManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioSource audioSourceBGM;
     public AudioSource audioSourcePitch;
-    
-    public void playOneShot(int i)
+    float volume;
+    public void playOneShot(int i,float v = 1)
     {
+        audioSource.volume = v;
         audioSource.PlayOneShot(oneShotClips[i]);
     }
     public void playOnePitchShot(int i, float pitch)
