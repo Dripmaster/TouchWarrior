@@ -25,12 +25,6 @@ public class TitleManager : MonoBehaviour
 
         SoundManager.Instance.playOneShot(8);
     }
-    public void Btn_Open()
-    {
-        openAnim.SetTrigger("Open");
-        SoundManager.Instance.playOneShot(8);
-        SoundManager.Instance.playOneShot(7);
-    }
     public void Btn_Title()
     {
         SoundManager.Instance.playOneShot(8);

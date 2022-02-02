@@ -17,12 +17,15 @@ public class CollectionScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        coinText.text = ""+SaveManager.getData("gold");
+        coinText.text = ""+SaveManager.getData("gold",1000);
         int i = 0;
         current =
         PlayerPrefs.GetInt("ButtonSets", 11);
+        PlayerPrefs.SetInt("IsButtonSets" + 11,1);
         foreach (var item in buttonSetArray.buttonSets)
         {
+            int have = PlayerPrefs.GetInt("IsButtonSets"+i, 0);
+            if (have == 0) { i++;  continue; }
             if (i < 11)
             {
                 commonSkins[i].setImageSet(item,i);

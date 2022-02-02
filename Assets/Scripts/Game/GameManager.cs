@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -53,6 +54,8 @@ public class GameManager : MonoBehaviour
     public ParticleSystem PangPareParticle;
     public GameObject FlashObj;
     public GameObject endCover;
+
+    public GameObject pausePopup;
     bool isPlayStage;
     private void Awake()
     {
@@ -206,7 +209,25 @@ public class GameManager : MonoBehaviour
     }
     public void cheatClick()
     {
-        toNext();
+        PauseBtn();
+    }
+    public void PauseBtn()
+    {
+        SoundManager.Instance.playOneShot(4);
+        Time.timeScale = 0;
+        pausePopup.SetActive(true);
+    }
+    public void PauseCont()
+    {
+        Time.timeScale = 1;
+        pausePopup.SetActive(false);
+        SoundManager.Instance.playOneShot(8);
+    }
+    public void PauseHome()
+    {
+        Time.timeScale = 1;
+        SoundManager.Instance.playOneShot(8);
+        SceneManager.LoadScene(0);
     }
     public void pauseClick()
     {
@@ -382,7 +403,7 @@ public class GameManager : MonoBehaviour
                 icon.flip(i % 2 == 0);
             }
             i++;
-            yield return new WaitForSeconds(TimerManager.Instance.getLimitTime()/7);
+            yield return new WaitForSeconds(TimerManager.Instance.getLimitTime()/8);
             if (stageManager.getStage() >= endStage)
                 break;
         } while (true);
