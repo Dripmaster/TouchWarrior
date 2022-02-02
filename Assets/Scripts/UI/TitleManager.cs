@@ -14,11 +14,7 @@ public class TitleManager : MonoBehaviour
         SoundManager.Instance.playBGM(0);
     }
 
-    public void SetButtonSet(int i)
-    {
-        SoundManager.Instance.playOneShot(8);
-        PlayerPrefs.SetInt("ButtonSets",i);
-    }
+ 
     public void Btn_Classic()
     {
 
