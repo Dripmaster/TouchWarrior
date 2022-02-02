@@ -23,6 +23,7 @@ public class TitleManager : MonoBehaviour
     public void Btn_Open()
     {
         openAnim.SetTrigger("Open");
+        SoundManager.Instance.playOneShot(7);
     }
     public void Btn_Title()
     {

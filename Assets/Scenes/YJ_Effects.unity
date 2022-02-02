@@ -517,6 +517,7 @@ MonoBehaviour:
   - {fileID: 86001560}
   - {fileID: 1811561503}
   - {fileID: 952921471}
+  PangPareParticle: {fileID: 0}
 --- !u!4 &45206641
 Transform:
   m_ObjectHideFlags: 0

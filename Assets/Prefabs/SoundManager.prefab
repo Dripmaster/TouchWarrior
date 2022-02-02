@@ -45,7 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d789e14bfb9298246b21e87ec3cd5e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oneShotClips: []
+  oneShotClips:
+  - {fileID: 8300000, guid: 712f568c38d053446bb269cdf228e290, type: 3}
+  - {fileID: 8300000, guid: dfc845a8bf598b247b4d7b26b73676dc, type: 3}
+  - {fileID: 8300000, guid: 86d354c29b77199419ae7297519e27e7, type: 3}
+  - {fileID: 8300000, guid: b37ff69486c5988408e4873cdf350444, type: 3}
+  - {fileID: 8300000, guid: 1469573e5abd4134f9f7b6f0b698dc94, type: 3}
+  - {fileID: 8300000, guid: d495347e53892c24a9f9c6690ef7da36, type: 3}
+  - {fileID: 8300000, guid: b330309e84b8981459d320563058dff6, type: 3}
+  - {fileID: 8300000, guid: 141fdb3b1114da74eb24d3c9f09c42d1, type: 3}
   BGMClips: []
   audioSource: {fileID: 7474005054683786411}
   audioSourcePitch: {fileID: 7474005056524104519}

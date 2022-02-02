@@ -24,6 +24,7 @@ public class TimerManager : MonoBehaviour
 
     public Image ForeBar;
     public Text TimeText;
+    Animator anim;
     float limitTime;
     float timeValue;
     bool showTimeBar;
@@ -39,6 +40,7 @@ public class TimerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         initTime(9,true);
     }
 
@@ -47,7 +49,10 @@ public class TimerManager : MonoBehaviour
     {
         
     }
-
+    public void overTime()
+    {
+        anim.SetTrigger("TimeOver");
+    }
     void initTime(float l, bool show = false)
     {
         limitTime = l;
