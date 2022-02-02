@@ -218,27 +218,26 @@ public class StageManager : MonoBehaviour
                     break;
             }
         }
-        else if ((currentStage + 1) > 54)
+        else if ((currentStage + 1) > 34)
         {
             if(currentStage%5 == 0)
             {
                 GameManager.Instance.doSkill((SkillType)Random.Range(0, 4));
             }
-        }else if ((currentStage + 1) > 14)
+        }else if ((currentStage + 1) > 5)
         {
             switch ((currentStage + 1))
             {
-                case 15:
-                case 32:
-                case 45:
+                case 7:
+                case 17:
+                case 30:
                     {
                         isSkillStage = true;
                         GameManager.Instance.doSkill((SkillType)Random.Range(0,2));
                     }
                     break;
+                case 13:
                 case 25:
-                case 42:
-                case 50:
                     {
                         isSkillStage = true;
                         GameManager.Instance.doSkill((SkillType)Random.Range(0, 2)+2);
@@ -265,6 +264,8 @@ public class StageManager : MonoBehaviour
     }
     public void endBoss()
     {
+
+        SoundManager.Instance.playOneShot(2);
         //boss stage effect end Here
         isBoss = false;
     }

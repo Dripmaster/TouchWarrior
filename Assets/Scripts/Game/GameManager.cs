@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour
 
     public RectTransform[] SwapObject1;
     public RectTransform[] SwapObject2;
+
+    public ParticleSystem PangPareParticle;
+    public GameObject FlashObj;
+    public GameObject endCover;
     bool isPlayStage;
     private void Awake()
     {
@@ -52,7 +56,8 @@ public class GameManager : MonoBehaviour
         stageManager = FindObjectOfType(typeof(StageManager)) as StageManager;
         isStageClear = false;
         isPlayStage = false;
-        
+        isWrongEnd = false;
+
     }
     bool imgSetReady;
     // Update is called once per frame
@@ -96,28 +101,51 @@ public class GameManager : MonoBehaviour
         if (isStageClear) return;
         if (!isPlayStage) return;
 
-        if(displayIcons[currentIndex].imageId == imgId)//correct
+        if (displayIcons[currentIndex].imageId == imgId)//correct
         {//correct Effect Here
             displayIcons[currentIndex].fire();
+            float pitch = (((float)currentIndex*1.3f) / (stageManager.isBoss ? displayIcons.Length : displayIcons.Length - displayIconsBoss.Length)) + 0.5f;
             currentIndex++;
-            
+            SoundManager.Instance.playOnePitchShot(1,pitch);
         }
         else//miss
         {
+            displayIcons[currentIndex].wrong();
+            isWrongEnd = true;
             stageManager.timerStop(true);
-            timeOut();
+            wrongOut();
         }
     }
+
+    public bool isWrongEnd;
     public void checkNext()
     {
         if (currentIndex >= (stageManager.isBoss ? displayIcons.Length : displayIcons.Length - displayIconsBoss.Length))
         {
+
+            SoundManager.Instance.playOneShot(3);
             toNext();
         }
     }
     public void toNext()
     {
+        float leftTime = TimerManager.Instance.getRemainTime()/TimerManager.Instance.getLimitTime();
+
+        if (leftTime <= 0.2f)
+        {
+            textEffect.setSprite(2);
+        } else if(leftTime<=0.5f){
+
+            textEffect.setSprite(1);
+        }
+        else
+        {
+
+            textEffect.setSprite(0);
+        }
+        PangPareParticle.Play();
         textEffect.Create();
+        FlashObj.SetActive(true);
         stageManager.timerStop(true);
         isPlayStage = false;
     }
@@ -162,14 +190,44 @@ public class GameManager : MonoBehaviour
     {
         toNext();
     }
+    public void pauseClick()
+    {
+
+        SoundManager.Instance.playOneShot(4);
+        //
+        //SoundManager.Instance.playOneShot(5);
+    }
     public void clearIndex()
     {
         currentIndex = 0;
     }
-    public void timeOut()
+    public void wrongOut()
     {
+        endCover.SetActive(true);
+        StartCoroutine(wrongOutC());
+        SoundManager.Instance.playOneShot(6);
+    }
+    IEnumerator wrongOutC()
+    {
+        yield return new WaitForSeconds(1f);
         popup_GameOverClear.gameObject.SetActive(true);
         popup_GameOverClear.setPopup();
+        endCover.SetActive(false);
+    }
+    public void timeOut()
+    {
+        endCover.SetActive(true);
+        TimerManager.Instance.overTime();
+        StartCoroutine(timeOutC());
+        SoundManager.Instance.playOneShot(6);
+    }
+    IEnumerator timeOutC()
+    {
+
+        yield return new WaitForSeconds(1f);
+        popup_GameOverClear.gameObject.SetActive(true);
+        popup_GameOverClear.setPopup();
+        endCover.SetActive(false);
     }
 
     public void doSkill(SkillType skill)
@@ -240,9 +298,10 @@ public class GameManager : MonoBehaviour
     Coroutine bounceCoroutine;
     IEnumerator bounceCard()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         int i = 0;
 
+        startNextReal();
         int endStage = stageManager.getStage();
         if (endStage > 100)
             endStage += 3;

@@ -9,6 +9,7 @@ public class IconDisplay : MonoBehaviour
     Image image;
     bool isFliped;
     public Animator anim;
+    public ParticleSystem particle;
     // Start is called before the first frame update
     void Awake()
     {
@@ -18,6 +19,8 @@ public class IconDisplay : MonoBehaviour
         }
         isFliped = false;
         anim = GetComponentInParent<Animator>();
+        particle = GetComponentInChildren<ParticleSystem>();
+        particle.Stop();
     }
 
     // Update is called once per frame
@@ -50,8 +53,13 @@ public class IconDisplay : MonoBehaviour
 
     }
 
+    public void wrong()
+    {
+        anim.SetTrigger("Wrong");
+    }
     public void fire()
     {
+        particle.Play();
         //correct and disappear effect Here
         GetComponentInParent<GameBtn>().isFlipcorrect = true;
         flip(true);
