@@ -520,6 +520,8 @@ MonoBehaviour:
   PangPareParticle: {fileID: 0}
   FlashObj: {fileID: 0}
   endCover: {fileID: 0}
+  pitchInterval: 0.6
+  pitchDefault: 1.1
   isWrongEnd: 0
 --- !u!4 &45206641
 Transform:
