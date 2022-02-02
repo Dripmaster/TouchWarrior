@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
     public Sprite GetSprite(int id)
     {
         if(!imgSetReady)
-        displaybtnSprites = btnSet.buttonSets[PlayerPrefs.GetInt("ButtonSets", 0)].imgSet;
+        displaybtnSprites = btnSet.buttonSets[PlayerPrefs.GetInt("ButtonSets", 11)].imgSet;
         imgSetReady = true;
         if (id < 0)
             return null;
@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
             textEffect.setSprite(0);
         }
         if (stageManager.isBoss)
-            SoundManager.Instance.playOneShot(2);
+            SoundManager.Instance.playOneShot(2,1.5f);
         PangPareParticle.Play();
         textEffect.Create();
         FlashObj.SetActive(true);

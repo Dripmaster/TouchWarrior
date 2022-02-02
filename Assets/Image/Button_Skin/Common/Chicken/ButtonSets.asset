@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3ed1af3743a9545987fc0d8946b1f1, type: 3}
+  m_Name: ButtonSets
+  m_EditorClassIdentifier: 
+  imgSet:
+  - {fileID: 21300000, guid: 80eb20459213d1a428dad086faf19621, type: 3}
+  - {fileID: 21300000, guid: 8663be6fda9df164aaf00cad17f33107, type: 3}
+  - {fileID: 21300000, guid: c13cd409bbc96b94b85063a8b747f75b, type: 3}
+  - {fileID: 21300000, guid: 8e7e6125d173f0141a839a917f242f41, type: 3}
+  - {fileID: 21300000, guid: ea57fb12d63824e45a8f4b92724e6830, type: 3}
+  - {fileID: 21300000, guid: 08a9d7cd6330fc64881d8283d3994d51, type: 3}
+  setName: chicken
+  rarity: 0
