@@ -28,6 +28,7 @@ public class TimerManager : MonoBehaviour
     float limitTime;
     float timeValue;
     bool showTimeBar;
+    RectTransform rect;
 
 
     private void Awake()
@@ -42,6 +43,8 @@ public class TimerManager : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         initTime(9,true);
+        rect = GetComponent<RectTransform>();
+        defualtWidth = rect.sizeDelta.x;
     }
 
     // Update is called once per frame
@@ -95,10 +98,14 @@ public class TimerManager : MonoBehaviour
     public void changeLimit(float v)
     {//effect here?
         float ratio = v/limitTime;
-
         limitTime = v;
         timeValue *= ratio;
+        float ChangeRatio = limitTime / defualtLimitTime;
+        rect.sizeDelta = new Vector2(defualtWidth*0.5f + defualtWidth * ChangeRatio*0.5f , rect.sizeDelta.y);
+
     }
+    float defualtLimitTime = 9;
+    float defualtWidth;
     public IEnumerator TimeReCount()
     {
         do

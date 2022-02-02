@@ -1340,6 +1340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openAnim: {fileID: 0}
+  isFirst: 1
 --- !u!1 &1178671911
 GameObject:
   m_ObjectHideFlags: 0

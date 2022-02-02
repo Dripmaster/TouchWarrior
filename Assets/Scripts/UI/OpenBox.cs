@@ -17,6 +17,6 @@ public class OpenBox : MonoBehaviour
     }
     public void openOk()
     {
-
+        SoundManager.Instance.playOneShot(9,0.3f);
     }
 }
