@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oneShotClips:
   - {fileID: 8300000, guid: 712f568c38d053446bb269cdf228e290, type: 3}
-  - {fileID: 8300000, guid: dfc845a8bf598b247b4d7b26b73676dc, type: 3}
+  - {fileID: 8300000, guid: e42412d3e1429cb4c9a8ebdd89364b58, type: 3}
   - {fileID: 8300000, guid: 86d354c29b77199419ae7297519e27e7, type: 3}
   - {fileID: 8300000, guid: b37ff69486c5988408e4873cdf350444, type: 3}
   - {fileID: 8300000, guid: 1469573e5abd4134f9f7b6f0b698dc94, type: 3}
