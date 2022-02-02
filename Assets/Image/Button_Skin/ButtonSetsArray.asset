@@ -13,7 +13,18 @@ MonoBehaviour:
   m_Name: ButtonSetsArray
   m_EditorClassIdentifier: 
   buttonSets:
-  - {fileID: 11400000, guid: e076809477e4db34a90be2ba5ccffd5c, type: 2}
   - {fileID: 11400000, guid: a86c35937ade22644bbb6e7dab7756f6, type: 2}
+  - {fileID: 11400000, guid: 48f003235e32b3949932b7f946d79ebe, type: 2}
+  - {fileID: 11400000, guid: 615460001a5f011498ed25531ba3b49e, type: 2}
+  - {fileID: 11400000, guid: 7ca3ebf758870c8498e986a338103382, type: 2}
+  - {fileID: 11400000, guid: 57551dc3ba15a544899b67151a080167, type: 2}
+  - {fileID: 11400000, guid: e30e5bc8e1cc8554ebb490db0942324b, type: 2}
+  - {fileID: 11400000, guid: 45eb3f35608df0142a18a1830b79f0f9, type: 2}
+  - {fileID: 11400000, guid: a071cf6bd434d2146bca8126601ecbe8, type: 2}
+  - {fileID: 11400000, guid: f72ef4de14fbf174690b9e3a63932651, type: 2}
+  - {fileID: 11400000, guid: d4600d2c5a5fcb9488e70ce1c129d7f6, type: 2}
+  - {fileID: 11400000, guid: 237f561ff61284548af64db422ac73b9, type: 2}
+  - {fileID: 11400000, guid: e076809477e4db34a90be2ba5ccffd5c, type: 2}
+  - {fileID: 11400000, guid: fa6fd6c6c41dd2f40b47ab39c82cddd4, type: 2}
   - {fileID: 11400000, guid: 7072478051256ea4b9696061ba1c0331, type: 2}
   - {fileID: 11400000, guid: cf792c166403c604bad5b53dd785e234, type: 2}

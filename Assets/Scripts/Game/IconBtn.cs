@@ -11,7 +11,7 @@ public class IconBtn : MonoBehaviour
     Image image;
     EventTrigger button;
     Animator anim;
-    bool isFlip;
+    public bool isFlip;
     // Start is called before the first frame update
     void Awake()
     {
