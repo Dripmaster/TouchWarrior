@@ -10,8 +10,8 @@ public class SaveManager
         
     }
 
-    public static int getData(string dataName)
+    public static int getData(string dataName,int v = 0)
     {
-        return PlayerPrefs.GetInt(dataName,0);
+        return PlayerPrefs.GetInt(dataName,v);
     }
 }

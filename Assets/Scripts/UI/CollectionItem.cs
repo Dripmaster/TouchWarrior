@@ -45,4 +45,18 @@ public class CollectionItem : MonoBehaviour
             SelectFrame.transform.localPosition = Vector3.zero;
         });
     }
+
+    public void setImageSet_v(SC_ButtonSet buttonSet, int ij)
+    {
+        myId = ij;
+        int i = 0;
+        childImage = GetComponentsInChildren<Image>();
+        foreach (var item in childImage)
+        {
+            if (i == 0) { i++; continue; }
+            if (item.name == "selectFrame") continue;
+            item.sprite = buttonSet.imgSet[i - 1];
+            i++;
+        }
+    }
 }
