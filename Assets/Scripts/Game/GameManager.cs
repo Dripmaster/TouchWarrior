@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         isStageClear = false;
         isPlayStage = false;
         isWrongEnd = false;
-
+        SoundManager.Instance.playBGM(1);
     }
     bool imgSetReady;
     // Update is called once per frame
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         if (displayIcons[currentIndex].imageId == imgId)//correct
         {//correct Effect Here
             displayIcons[currentIndex].fire();
-            float pitch = (((float)currentIndex*1.3f) / (stageManager.isBoss ? displayIcons.Length : displayIcons.Length - displayIconsBoss.Length)) + 0.5f;
+            float pitch = (((float)currentIndex* pitchInterval) / (stageManager.isBoss ? displayIcons.Length : displayIcons.Length - displayIconsBoss.Length)) + pitchDefault;
             currentIndex++;
             SoundManager.Instance.playOnePitchShot(1,pitch);
         }
@@ -116,7 +116,8 @@ public class GameManager : MonoBehaviour
             wrongOut();
         }
     }
-
+    public float pitchInterval = 0.6f;
+    public float pitchDefault = 1.1f;
     public bool isWrongEnd;
     public void checkNext()
     {
@@ -143,6 +144,8 @@ public class GameManager : MonoBehaviour
 
             textEffect.setSprite(0);
         }
+        if (stageManager.isBoss)
+            SoundManager.Instance.playOneShot(2);
         PangPareParticle.Play();
         textEffect.Create();
         FlashObj.SetActive(true);
@@ -203,9 +206,14 @@ public class GameManager : MonoBehaviour
     }
     public void wrongOut()
     {
+        SoundManager.Instance.endBgm();
         endCover.SetActive(true);
         StartCoroutine(wrongOutC());
         SoundManager.Instance.playOneShot(6);
+        foreach (var icon in IconBtns)
+        {
+            icon.FlipIcon(true);
+        }
     }
     IEnumerator wrongOutC()
     {
@@ -216,10 +224,15 @@ public class GameManager : MonoBehaviour
     }
     public void timeOut()
     {
+        SoundManager.Instance.endBgm();
         endCover.SetActive(true);
         TimerManager.Instance.overTime();
         StartCoroutine(timeOutC());
         SoundManager.Instance.playOneShot(6);
+        foreach (var icon in IconBtns)
+        {
+            icon.FlipIcon(true);
+        }
     }
     IEnumerator timeOutC()
     {

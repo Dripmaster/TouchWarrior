@@ -12,6 +12,7 @@ public class TextEffectEnd : MonoBehaviour
     public void setSprite(int v)
     {
         image.sprite = Texts[v];
+        image.SetNativeSize();
     }
     // Start is called before the first frame update
     void Start()

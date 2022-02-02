@@ -17,6 +17,7 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        isBGMJ = false;
     }
     public static SoundManager Instance
     {
@@ -33,6 +34,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] oneShotClips;
     public AudioClip[] BGMClips;
     public AudioSource audioSource;
+    public AudioSource audioSourceBGM;
     public AudioSource audioSourcePitch;
     
     public void playOneShot(int i)
@@ -44,10 +46,21 @@ public class SoundManager : MonoBehaviour
         audioSourcePitch.pitch = pitch;
         audioSourcePitch.PlayOneShot(oneShotClips[i]);
     }
+    bool isBGMJ;
     public void playBGM(int i)
     {
-        audioSource.clip = BGMClips[i];
-        
-        audioSource.Play();
+        if (isBGMJ && i == 0) return;
+        if(i == 0)
+            isBGMJ = true;
+        if (i == 1)
+            isBGMJ = false;
+        audioSourceBGM.clip = BGMClips[i];
+
+        audioSourceBGM.Play();
+    }
+    public void endBgm()
+    {
+        isBGMJ = false;
+        audioSource.Stop();
     }
 }

@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class IconBtn : MonoBehaviour
 {
     public int imageId;
     public int PosId;
     Image image;
-    Button button;
+    EventTrigger button;
     Animator anim;
     bool isFlip;
     // Start is called before the first frame update
@@ -22,19 +23,31 @@ public class IconBtn : MonoBehaviour
         setImage(imageId);
         setPos(PosId);
         GameManager.Instance.setOccupied(PosId,true);
-        button = GetComponent<Button>();
-        button.onClick.AddListener(() => { 
+
+        button = GetComponent<EventTrigger>();
+
+        EventTrigger.Entry entry_PointerDown = new EventTrigger.Entry();
+        entry_PointerDown.eventID = EventTriggerType.PointerDown;
+        entry_PointerDown.callback.AddListener((data) => {
             GameManager.Instance.onBtnClicked(imageId);
 
             StartCoroutine(press());
         });
+        button.triggers.Add(entry_PointerDown);
+
+
+
     }
     IEnumerator press()
     {
         anim.SetBool("IsPressed", true);
         yield return new WaitForSeconds(0.05f);
         if(!GameManager.Instance.isWrongEnd)
-        anim.SetBool("IsPressed", false);
+            anim.SetBool("IsPressed", false);
+        else
+        {
+            setImage(imageId);
+        }
     }
     public void pressEnd()
     {
