@@ -257,13 +257,18 @@ public class StageManager : MonoBehaviour
         return isSkillStage+1;
 
     }
+    IEnumerator LateReal()
+    {
+        yield return new WaitForSeconds(1);
+        GameManager.Instance.startNextReal();
+    }
     public void nowBoss()
     {
         isBoss = true;
         if (currentStage < 30)
         {
             TimerManager.Instance.changeLimit(TimerManager.Instance.getLimitTime() * 1.75f);//effect Here?
-            GameManager.Instance.startNextReal();
+            StartCoroutine(LateReal());
         }
         else
         {

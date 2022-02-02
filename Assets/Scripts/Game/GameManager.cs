@@ -267,6 +267,7 @@ public class GameManager : MonoBehaviour
             case SkillType.flip:
                 {
                     StartCoroutine(flipCards());
+                    StartCoroutine(LateReal());
                 }
                 break;
             case SkillType.move:
@@ -289,6 +290,7 @@ public class GameManager : MonoBehaviour
                     BtnPositions_occupied[IconBtns[targetBtn].PosId] = false;
                     BtnPositions_occupied[idx] = true;
                     IconBtns[targetBtn].PosId = idx;
+                    StartCoroutine(LateReal());
                     IconBtns[targetBtn].setPos(idx,true);
                 }
                 break;
@@ -296,7 +298,7 @@ public class GameManager : MonoBehaviour
                 {
                     swapCout = 0;
                     swapMaxCount = 0;
-
+                    StartCoroutine(LateReal());
                     if (!isSwapAlready)
                     {
                         swapTempPos1 = SwapObject1.localPosition;
@@ -351,11 +353,16 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+    IEnumerator LateReal()
+    {
+        yield return new WaitForSeconds(1);
+        GameManager.Instance.startNextReal();
+    }
     Coroutine bounceCoroutine;
     bool isSwapAlready;
     IEnumerator bounceCard()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
         int i = 0;
 
         startNextReal();
@@ -402,8 +409,6 @@ public class GameManager : MonoBehaviour
             }
         } while (true);
         swapCout++;
-        if(swapCout>=swapMaxCount)
-            startNextReal();
     }
 
     IEnumerator flipCards()
@@ -421,8 +426,6 @@ public class GameManager : MonoBehaviour
             icon.FlipIcon();
             yield return new WaitForSeconds(0.1f);
       }
-        startNextReal();
-
         do
         {
             yield return null;
