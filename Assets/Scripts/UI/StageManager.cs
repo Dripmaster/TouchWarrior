@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
+    public GameObject bossIcon;
     Text stageText;
+    Animator anim;
     public int maxStage = 0;//0 = inf, other = 1~MaxStage
 
     
@@ -13,7 +15,9 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         stageText = GetComponent<Text>();
+        bossIcon.SetActive(false);
     }
     // Start is called before the first frame update
     void OnEnable()
@@ -44,14 +48,32 @@ public class StageManager : MonoBehaviour
         }
         else
         {
-            checkTimer();
-            setText(currentStage);
-            StartCoroutine(setStageBtn());
-            GameManager.Instance.clearIndex();
-            TimerManager.Instance.reCountTime();
+            StartCoroutine(stageUpEffect());
         }
         return isComplete;
     }
+
+    IEnumerator stageUpEffect()
+    {
+        anim.SetTrigger("StageClear");
+        setText(currentStage);
+        if (isBoss)
+        {
+            bossIcon.SetActive(true);
+        }
+        else
+        {
+            bossIcon.SetActive(false);
+        }
+        checkTimer();
+        StartCoroutine(TimerManager.Instance.TimeReCount());
+        yield return StartCoroutine(setStageBtn());
+        GameManager.Instance.clearIndex();
+        GameManager.Instance.startNextStageReal();
+    }
+
+
+
     public void timerStop(bool v)
     {
         TimerManager.Instance.timeStop(v);
@@ -91,25 +113,29 @@ public class StageManager : MonoBehaviour
         else if(currentStage>150) {
             t = 4;
         }
-        else if (currentStage > 130)
-        {
-            t = 4.5f;
-        }
-        else if (currentStage > 100)
+        else if (currentStage > 120)
         {
             t = 5.0f;
         }
-        else if (currentStage > 60)
+        else if (currentStage > 100)
         {
             t = 5.5f;
         }
+        else if (currentStage > 70)
+        {
+            t = 6.0f;
+        }
+        else if (currentStage > 50)
+        {
+            t = 6.5f;
+        }
         else if (currentStage > 30)
         {
-            t = 6;
+            t = 7;
         }
         else if (currentStage > 10)
         {
-            t = 6.5f;
+            t = 8.0f;
         }
         switch (currentStage)
         {
@@ -141,12 +167,14 @@ public class StageManager : MonoBehaviour
         }
         TimerManager.Instance.changeLimit(t);
     }
-    public void checkSkill()
+    public bool checkSkill()
     {
+        bool isSkillStage = false;
         if (isBoss)
             endBoss();
         if( (currentStage+1)%10 == 0)
         {
+            isSkillStage = true;
             GameManager.Instance.doSkill(SkillType.boss);
         }
 
@@ -159,6 +187,7 @@ public class StageManager : MonoBehaviour
                 case 6:
                 case 8:
                 case 0:
+                    isSkillStage = true;
                     GameManager.Instance.doSkill((SkillType)Random.Range(0, 4));
                     break;
             }
@@ -171,6 +200,7 @@ public class StageManager : MonoBehaviour
                 case 5:
                 case 8:
                 case 0:
+                    isSkillStage = true;
                     GameManager.Instance.doSkill((SkillType)Random.Range(0, 4));
                     break;
             }
@@ -183,44 +213,45 @@ public class StageManager : MonoBehaviour
                 case 3:
                 case 6:
                 case 0:
+                    isSkillStage = true;
                     GameManager.Instance.doSkill((SkillType)Random.Range(0, 4));
                     break;
             }
         }
-        else if ((currentStage + 1) > 54)
+        else if ((currentStage + 1) > 34)
         {
             if(currentStage%5 == 0)
             {
                 GameManager.Instance.doSkill((SkillType)Random.Range(0, 4));
             }
-        }else if ((currentStage + 1) > 14)
+        }else if ((currentStage + 1) > 5)
         {
             switch ((currentStage + 1))
             {
-                case 15:
-                case 32:
-                case 45:
+                case 7:
+                case 17:
+                case 30:
                     {
+                        isSkillStage = true;
                         GameManager.Instance.doSkill((SkillType)Random.Range(0,2));
                     }
                     break;
+                case 13:
                 case 25:
-                case 42:
-                case 50:
                     {
+                        isSkillStage = true;
                         GameManager.Instance.doSkill((SkillType)Random.Range(0, 2)+2);
                     }
                     break;
             }
         }
-
+        return isSkillStage;
 
     }
     public void nowBoss()
     {
-        //boss stage effect Here
         isBoss = true;
-        if (currentStage < 29)
+        if (currentStage < 50)
         {
             TimerManager.Instance.changeLimit(TimerManager.Instance.getLimitTime() * 1.75f);//effect Here?
         }
@@ -229,9 +260,12 @@ public class StageManager : MonoBehaviour
             TimerManager.Instance.changeLimit(TimerManager.Instance.getLimitTime() * 2f);//effect Here?
 
         }
+        GameManager.Instance.startNextReal();
     }
     public void endBoss()
     {
+
+        SoundManager.Instance.playOneShot(2);
         //boss stage effect end Here
         isBoss = false;
     }

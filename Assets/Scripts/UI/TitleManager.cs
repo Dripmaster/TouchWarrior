@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
+    public Animator openAnim;
 
 
+    public void SetButtonSet(int i)
+    {
+        PlayerPrefs.SetInt("ButtonSets",i);
+    }
     public void Btn_Classic()
     {
 
@@ -14,6 +19,11 @@ public class TitleManager : MonoBehaviour
     public void Btn_Challenge()
     {
 
+    }
+    public void Btn_Open()
+    {
+        openAnim.SetTrigger("Open");
+        SoundManager.Instance.playOneShot(7);
     }
     public void Btn_Title()
     {

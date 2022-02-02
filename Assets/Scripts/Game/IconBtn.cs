@@ -9,6 +9,7 @@ public class IconBtn : MonoBehaviour
     public int PosId;
     Image image;
     Button button;
+    Animator anim;
     bool isFlip;
     // Start is called before the first frame update
     void Awake()
@@ -17,13 +18,28 @@ public class IconBtn : MonoBehaviour
         {
             image = GetComponent<Image>();
         }
+        anim = GetComponentInParent<Animator>();
         setImage(imageId);
         setPos(PosId);
         GameManager.Instance.setOccupied(PosId,true);
         button = GetComponent<Button>();
-        button.onClick.AddListener(() => GameManager.Instance.onBtnClicked(imageId));
-    }
+        button.onClick.AddListener(() => { 
+            GameManager.Instance.onBtnClicked(imageId);
 
+            StartCoroutine(press());
+        });
+    }
+    IEnumerator press()
+    {
+        anim.SetBool("IsPressed", true);
+        yield return new WaitForSeconds(0.05f);
+        if(!GameManager.Instance.isWrongEnd)
+        anim.SetBool("IsPressed", false);
+    }
+    public void pressEnd()
+    {
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -76,12 +92,13 @@ public class IconBtn : MonoBehaviour
             yield return null;
             dt += Time.deltaTime*2;
             transform.parent.position = Vector3.Lerp(tmpPos, targetPos, dt);
-            if (dt >= 0.5f)
+            if (dt >= 1f)
             {
                 transform.parent.position = targetPos;
                 break;
             }
         } while (true);
+        GameManager.Instance.startNextReal();
     }
 
     IEnumerator flipAnim(bool clear)
