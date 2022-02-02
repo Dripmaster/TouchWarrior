@@ -7,25 +7,37 @@ public class TextEffectEnd : MonoBehaviour
 {
     public Sprite[] Texts;
     Animator anim;
-    Image image;
-
+    public Image image;
+    public bool onDisble;
     public void setSprite(int v)
     {
         image.sprite = Texts[v];
         image.SetNativeSize();
     }
+    private void Awake()
+    {
+
+        if (
+        image == null)
+            image = GetComponentInChildren<Image>();
+        anim = GetComponent<Animator>();
+        setSprite(0);
+        if (onDisble)
+            gameObject.SetActive(false);
+    }
     // Start is called before the first frame update
     void Start()
     {
-        image = GetComponentInChildren<Image>();
-        anim = GetComponent<Animator>();
-        setSprite(0);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void CreateEndX()
+    {
+        gameObject.SetActive(false);
     }
     public void CreateEnd()
     {

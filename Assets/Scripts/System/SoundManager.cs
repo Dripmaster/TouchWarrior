@@ -13,7 +13,7 @@ public class SoundManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-        else
+        else if (instance != this)
         {
             Destroy(this.gameObject);
         }
@@ -24,9 +24,11 @@ public class SoundManager : MonoBehaviour
     {
         get
         {
-            if (null == instance)
+            if (!instance)
             {
-                return null;
+                instance = FindObjectOfType(typeof(SoundManager)) as SoundManager;
+                DontDestroyOnLoad(instance.gameObject);
+                return instance;
             }
             return instance;
         }
@@ -63,6 +65,6 @@ public class SoundManager : MonoBehaviour
     public void endBgm()
     {
         isBGMJ = false;
-        audioSource.Stop();
+        audioSourceBGM.Stop();
     }
 }

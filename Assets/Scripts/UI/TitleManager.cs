@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 public class TitleManager : MonoBehaviour
 {
     public Animator openAnim;
+    public bool isFirst;
 
     private void Awake()
     {
+        if(isFirst)
         SoundManager.Instance.playBGM(0);
     }
 

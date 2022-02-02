@@ -50,6 +50,7 @@ public class PopupManager : MonoBehaviour
     }
     public void continueBtn()
     {
+        SoundManager.Instance.playOneShot(8);
         SceneManager.LoadScene(1);
     }
 }

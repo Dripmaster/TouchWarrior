@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public IconBtn[] IconBtns;
     public Transform[] BtnPositions;
     public TextEffectEnd textEffect;
+    public TextEffectEnd textEffect_Skill;
     bool[] BtnPositions_occupied;
 
     public PopupManager popup_GameOverClear;
@@ -39,8 +40,15 @@ public class GameManager : MonoBehaviour
     bool isStageClear;
     int currentIndex;
 
-    public RectTransform[] SwapObject1;
-    public RectTransform[] SwapObject2;
+    public RectTransform SwapObject1;
+    public RectTransform SwapObject2;
+    public RectTransform SwapObject3;
+    public RectTransform SwapObject_pos1;
+    public RectTransform SwapObject_pos2;
+    public RectTransform SwapObject_pos3;
+    Vector3 swapTempPos1;
+    Vector3 swapTempPos2;
+    Vector3 swapTempPos3;
 
     public ParticleSystem PangPareParticle;
     public GameObject FlashObj;
@@ -57,6 +65,7 @@ public class GameManager : MonoBehaviour
         isStageClear = false;
         isPlayStage = false;
         isWrongEnd = false;
+        isSwapAlready = false;
         SoundManager.Instance.playBGM(1);
     }
     bool imgSetReady;
@@ -160,6 +169,7 @@ public class GameManager : MonoBehaviour
             item.hide();
         }
         StartCoroutine(startNextC());
+
     }
     IEnumerator startNextC()
     {
@@ -176,9 +186,14 @@ public class GameManager : MonoBehaviour
                 }
             }
         } while (dododododo);
-        bool isSkillStage = stageManager.checkSkill();
-        if (!isSkillStage)
+        int isSkillStage = stageManager.checkSkill();
+        if (isSkillStage==0)
             startNextReal();
+        if (isSkillStage!=0)
+        {
+                textEffect_Skill.setSprite(isSkillStage);
+                textEffect_Skill.gameObject.SetActive(true);
+        }
     }
     public void startNextReal()
     {
@@ -212,6 +227,7 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance.playOneShot(6);
         foreach (var icon in IconBtns)
         {
+            if(icon.isFlip)
             icon.FlipIcon(true);
         }
     }
@@ -231,7 +247,8 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance.playOneShot(6);
         foreach (var icon in IconBtns)
         {
-            icon.FlipIcon(true);
+            if (icon.isFlip)
+                icon.FlipIcon(true);
         }
     }
     IEnumerator timeOutC()
@@ -279,19 +296,45 @@ public class GameManager : MonoBehaviour
                 {
                     swapCout = 0;
                     swapMaxCount = 0;
-                    foreach (var sobj in SwapObject1)
+
+                    if (!isSwapAlready)
                     {
+                        swapTempPos1 = SwapObject1.localPosition;
+                        swapTempPos2 = SwapObject2.localPosition;
+                        swapTempPos3 = SwapObject3.localPosition;
+
+
                         swapMaxCount++;
-                        //sobj.localPosition = new Vector3(sobj.localPosition.x,-150+(-150-sobj.localPosition.y));
-                        StartCoroutine(swapPos( sobj, new Vector3(sobj.localPosition.x, -20 + (-20 - sobj.localPosition.y))));
+                        StartCoroutine(swapPos(SwapObject1, SwapObject_pos1.localPosition));
+
+                        swapMaxCount++;
+                        StartCoroutine(swapPos(SwapObject2, SwapObject_pos2.localPosition));
+
+                        swapMaxCount++;
+                        StartCoroutine(swapPos(SwapObject3, SwapObject_pos3.localPosition));
                     }
+                    else
+                    {
+
+                        swapMaxCount++;
+                        StartCoroutine(swapPos(SwapObject1, swapTempPos1));
+
+                        swapMaxCount++;
+                        StartCoroutine(swapPos(SwapObject2, swapTempPos2));
+
+                        swapMaxCount++;
+                        StartCoroutine(swapPos(SwapObject3, swapTempPos3));
+                    }
+
+                    isSwapAlready = !isSwapAlready;
+                    /*
                     foreach (var sobj in SwapObject2)
                     {
                         swapMaxCount++;
                         //var soj = sobj.GetComponentInParent<RectTransform>();
                         //sobj.localPosition = new Vector3(sobj.localPosition.x, -80+ (-80 - sobj.localPosition.y));
                         StartCoroutine(swapPos(sobj, new Vector3(sobj.localPosition.x, -80 + (-80 - sobj.localPosition.y))));
-                    }
+                    }*/
                 }
                 break;
             case SkillType.bounce:
@@ -309,6 +352,7 @@ public class GameManager : MonoBehaviour
         }
     }
     Coroutine bounceCoroutine;
+    bool isSwapAlready;
     IEnumerator bounceCard()
     {
         yield return new WaitForSeconds(0.1f);

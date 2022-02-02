@@ -59,7 +59,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9d9ed57e2432d834f934c32e4bff697e, type: 3}
   BGMClips:
   - {fileID: 8300000, guid: 8ccb185756203924780317171238805a, type: 3}
-  - {fileID: 8300000, guid: 9d1411cc013a1ee4e875455b42484346, type: 3}
+  - {fileID: 8300000, guid: 8cba7d631be007a4eb60f2b09d075825, type: 3}
   audioSource: {fileID: 7474005054683786411}
   audioSourceBGM: {fileID: 7620411897662425640}
   audioSourcePitch: {fileID: 7474005056524104519}
@@ -329,7 +329,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0

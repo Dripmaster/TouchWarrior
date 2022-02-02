@@ -166,19 +166,18 @@ public class StageManager : MonoBehaviour
         if (change)
         {
             //effect here
+            GameManager.Instance.textEffect_Skill.setSprite(0);
+            GameManager.Instance.textEffect_Skill.gameObject.SetActive(true);
         }
+        if(currentStage!=1)
         TimerManager.Instance.changeLimit(t);
     }
-    public bool checkSkill()
+    public int checkSkill()
     {
-        bool isSkillStage = false;
+        int isSkillStage = -1;
         if (isBoss)
             endBoss();
-        if( (currentStage+1)%10 == 0)
-        {
-            isSkillStage = true;
-            GameManager.Instance.doSkill(SkillType.boss);
-        }
+
 
         if ((currentStage + 1) > 199)
         {
@@ -189,8 +188,8 @@ public class StageManager : MonoBehaviour
                 case 6:
                 case 8:
                 case 0:
-                    isSkillStage = true;
-                    GameManager.Instance.doSkill((SkillType)Random.Range(0, 4));
+                    isSkillStage = Random.Range(0, 4);
+                    GameManager.Instance.doSkill((SkillType)isSkillStage);
                     break;
             }
         }
@@ -202,8 +201,8 @@ public class StageManager : MonoBehaviour
                 case 5:
                 case 8:
                 case 0:
-                    isSkillStage = true;
-                    GameManager.Instance.doSkill((SkillType)Random.Range(0, 4));
+                    isSkillStage = Random.Range(0, 4);
+                    GameManager.Instance.doSkill((SkillType)isSkillStage);
                     break;
             }
 
@@ -215,8 +214,8 @@ public class StageManager : MonoBehaviour
                 case 3:
                 case 6:
                 case 0:
-                    isSkillStage = true;
-                    GameManager.Instance.doSkill((SkillType)Random.Range(0, 4));
+                    isSkillStage = Random.Range(0, 4);
+                    GameManager.Instance.doSkill((SkillType)isSkillStage);
                     break;
             }
         }
@@ -224,8 +223,8 @@ public class StageManager : MonoBehaviour
         {
             if(currentStage%5 == 0)
             {
-                isSkillStage = true;
-                GameManager.Instance.doSkill((SkillType)Random.Range(0, 4));
+                isSkillStage = Random.Range(0, 4);
+                GameManager.Instance.doSkill((SkillType)isSkillStage);
             }
         }else if ((currentStage + 1) > 5)
         {
@@ -235,20 +234,27 @@ public class StageManager : MonoBehaviour
                 case 17:
                 case 30:
                     {
-                        isSkillStage = true;
-                        GameManager.Instance.doSkill((SkillType)Random.Range(0,2));
+                        isSkillStage = Random.Range(0, 2);
+                        GameManager.Instance.doSkill((SkillType)isSkillStage);
                     }
                     break;
                 case 13:
                 case 25:
                     {
-                        isSkillStage = true;
-                        GameManager.Instance.doSkill((SkillType)Random.Range(0, 2)+2);
+                        isSkillStage = Random.Range(0, 2)+2;
+                        GameManager.Instance.doSkill((SkillType)isSkillStage);
                     }
                     break;
             }
         }
-        return isSkillStage;
+
+        if ((currentStage + 1) % 10 == 0)
+        {
+            isSkillStage = 4;
+            GameManager.Instance.doSkill(SkillType.boss);
+        }
+
+        return isSkillStage+1;
 
     }
     public void nowBoss()
